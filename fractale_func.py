@@ -19,7 +19,7 @@ def generate_fractal(x_min, x_max, y_min, y_max):
             real = x_min + (x / (width - 1)) * (x_max - x_min)
             imag = y_min + (y / (height - 1)) * (y_max - y_min)
 
-            # initialisation les valeurs
+            # initialisation des valeurs
             z = complex(real, imag)
             c = complex(real, imag)
 
@@ -38,19 +38,18 @@ def generate_fractal(x_min, x_max, y_min, y_max):
     return image
 
 
-#def update_zoom(frame, initial_x_min, initial_x_max, initial_y_min, initial_y_max, final_x_min, final_x_max, final_y_min, final_y_max, num_frames):
- #   progress = frame / (num_frames + 1)  # de 0 à 1
-  #  new_x_min = initial_x_min + (final_x_min - initial_x_min) * progress
-   # new_x_max = initial_x_max + (final_x_max - initial_x_max) * progress
-    #new_y_min = initial_y_min + (final_y_min - initial_y_min) * progress
-    #new_y_max = initial_y_max + (final_y_max - initial_y_max) * progress
-
-    #return generate_fractal(new_x_min, new_x_max, new_y_min, new_y_max)
+# return generate_fractal(new_x_min, new_x_max, new_y_min, new_y_max)
 def update_zoom(frame, initial_x_min, initial_x_max, initial_y_min, initial_y_max, x_center, y_center, num_frames):
+    x_center = 1.5
+    y_center = -1.5
+    images = []
     progress = frame / (num_frames + 1)  # de 0 à 1
     new_x_min = initial_x_min + (x_center - initial_x_min) * progress
     new_x_max = initial_x_max - (initial_x_max - x_center) * progress
     new_y_min = initial_y_min + (y_center - initial_y_min) * progress
     new_y_max = initial_y_max - (initial_y_max - y_center) * progress
+
+    frame = generate_fractal(new_x_min, new_x_max, new_y_min, new_y_max)
+    images.append(frame)
 
     return generate_fractal(new_x_min, new_x_max, new_y_min, new_y_max)
